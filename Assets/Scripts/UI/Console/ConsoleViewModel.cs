@@ -1,5 +1,5 @@
 using Core.Base;
-using Infrastucture.CommandSystem;
+using Infrastructure.CommandSystem;
 
 namespace UI.Console
 {

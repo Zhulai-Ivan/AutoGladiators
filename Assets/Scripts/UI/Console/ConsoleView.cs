@@ -8,8 +8,9 @@ namespace UI.Console
 {
     public class ConsoleView : BaseView<ConsoleViewModel>
     {
-        [Header("Ui elements")]
-        [SerializeField] private TMP_InputField _commandInput;
+        [Header("Ui elements")] [SerializeField]
+        private TMP_InputField _commandInput;
+
         [SerializeField] private TMP_Text _logText;
         [SerializeField] private ScrollRect _scrollRect;
 
@@ -30,9 +31,9 @@ namespace UI.Console
         {
             if (string.IsNullOrWhiteSpace(input))
                 return;
-            
+
             ViewModel.Submit(input);
-            
+
             _commandInput.text = string.Empty;
             _commandInput.ActivateInputField();
         }
@@ -40,7 +41,7 @@ namespace UI.Console
         protected override void OnMessageReceived(string message)
         {
             _logText.text += message + "\n";
-            
+
             Canvas.ForceUpdateCanvases();
             _scrollRect.verticalNormalizedPosition = 0;
         }

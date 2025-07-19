@@ -1,6 +1,6 @@
 using System;
 
-namespace Infrastucture.CommandSystem
+namespace Infrastructure.CommandSystem
 {
     public class CommandConsoleModel
     {

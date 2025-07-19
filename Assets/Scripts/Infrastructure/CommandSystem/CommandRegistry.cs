@@ -4,7 +4,7 @@ using Core.Attributes;
 using Extensions;
 using UnityEngine;
 
-namespace Infrastucture.CommandSystem
+namespace Infrastructure.CommandSystem
 {
     public class CommandRegistry
     {
