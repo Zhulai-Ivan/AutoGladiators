@@ -13,6 +13,8 @@ namespace Core.Base
         public void Construct(TViewModel viewModel)
         {
             ViewModel = viewModel;
+            
+            Initialize();
         }
 
         protected virtual void OnEnable()
@@ -20,6 +22,8 @@ namespace Core.Base
             ViewModel.MessageEvent += OnMessageReceived;
             ViewModel.OnViewShown();
         }
+        
+        protected virtual void Initialize(){ }
 
         protected virtual void OnDisable()
         {

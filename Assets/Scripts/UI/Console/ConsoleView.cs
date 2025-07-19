@@ -1,5 +1,7 @@
+using System;
 using Core.Base;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +13,11 @@ namespace UI.Console
         [SerializeField] private TMP_InputField _commandInput;
         [SerializeField] private TMP_Text _logText;
         [SerializeField] private ScrollRect _scrollRect;
+        
+        protected override void Initialize()
+        {
+            ViewModel.IsActive.Subscribe(SetConsoleActive).AddTo(this);
+        }
 
         protected override void OnEnable()
         {
@@ -18,6 +25,7 @@ namespace UI.Console
 
             Subscribe();
         }
+        
 
         private void Subscribe()
         {
@@ -43,6 +51,9 @@ namespace UI.Console
             Canvas.ForceUpdateCanvases();
             _scrollRect.verticalNormalizedPosition = 0;
         }
+
+        private void SetConsoleActive(bool active) => 
+            gameObject.SetActive(active);
 
         protected override void OnDisable()
         {

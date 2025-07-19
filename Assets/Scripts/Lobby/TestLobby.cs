@@ -38,14 +38,23 @@ namespace Lobby
             {
                 string lobbyName = "MyLobby";
                 int maxPlayers = 4;
-                Unity.Services.Lobbies.Models.Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers);
-            
+                Unity.Services.Lobbies.Models.Lobby lobby =
+                    await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers);
+
                 _consoleViewModel.SendMessage($"Lobby created: {lobby.Name} | {lobby.MaxPlayers}");
             }
             catch (LobbyServiceException exception)
             {
                 _consoleViewModel.SendMessage($"Can not create lobby: {exception.Message}");
             }
+
+        }
+
+        private async void LobbiesList()
+        {
+            var queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
+            
+            
         }
     }
 }
