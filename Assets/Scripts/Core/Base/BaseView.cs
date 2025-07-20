@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Core.Base
 {
-    public abstract class BaseView<TViewModel> : MonoBehaviour 
+    public abstract class BaseView<TViewModel> : MonoBehaviour, IDisposable
         where TViewModel : BaseViewModel
     {
         protected TViewModel ViewModel;
@@ -19,13 +19,21 @@ namespace Core.Base
         
         protected virtual void OnEnable()
         {
-            ViewModel.MessageEvent += OnMessageReceived;
             ViewModel.OnViewShown();
         }
-        
-        protected virtual void Initialize(){ }
+
+        protected virtual void Initialize()
+        {
+            ViewModel.MessageEvent += OnMessageReceived;
+        }
 
         protected virtual void OnDisable()
+        {
+            
+        }
+
+        protected virtual void OnMessageReceived(string message) { }
+        public void Dispose()
         {
             if (ViewModel != null)
             {
@@ -33,7 +41,5 @@ namespace Core.Base
                 ViewModel.OnViewHidden();
             }
         }
-
-        protected virtual void OnMessageReceived(string message) { }
     }
 }

@@ -1,23 +1,13 @@
 using Core.Attributes;
-using UI.Console;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using UnityEngine;
-using Zenject;
 
 namespace Lobby
 {
     public class TestLobby : MonoBehaviour
     {
-        private ConsoleViewModel _consoleViewModel;
-
-        [Inject]
-        public void Construct(ConsoleViewModel consoleModel)
-        {
-            _consoleViewModel = consoleModel;
-        }
-    
         private async void Start()
         {
             await UnityServices.InitializeAsync();
@@ -41,11 +31,11 @@ namespace Lobby
                 Unity.Services.Lobbies.Models.Lobby lobby =
                     await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers);
 
-                _consoleViewModel.SendMessage($"Lobby created: {lobby.Name} | {lobby.MaxPlayers}");
+               Debug.Log($"Lobby created: {lobby.Name} | {lobby.MaxPlayers}");
             }
             catch (LobbyServiceException exception)
             {
-                _consoleViewModel.SendMessage($"Can not create lobby: {exception.Message}");
+                Debug.Log($"Can not create lobby: {exception.Message}");
             }
 
         }

@@ -17,6 +17,8 @@ namespace UI.Console
          
         protected override void Initialize()
         {
+            base.Initialize();
+            
             ViewModel.IsActive.Subscribe(SetConsoleActive).AddTo(this);
             _closeButton.onClick.AddListener(() => ViewModel.IsActive.Value = false);
         }

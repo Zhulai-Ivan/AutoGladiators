@@ -1,6 +1,7 @@
 using Core.Base;
 using Infrastructure.CommandSystem;
 using UniRx;
+using UnityEngine;
 
 namespace UI.Console
 {
@@ -13,6 +14,12 @@ namespace UI.Console
         public ConsoleViewModel(CommandConsoleModel consoleModel)
         {
             _consoleModel = consoleModel;
+            Application.logMessageReceived += OnLogMessageReceived;
+        }
+
+        private void OnLogMessageReceived(string condition, string stackTrace, LogType type)
+        {
+            SendMessage(condition);
         }
 
         public void Submit(string input)
@@ -23,5 +30,10 @@ namespace UI.Console
 
         public void ToggleConsole() => 
             IsActive.Value = !IsActive.Value;
+
+        public override void Dispose()
+        {
+            Application.logMessageReceived -= OnLogMessageReceived;
+        }
     }
 }
