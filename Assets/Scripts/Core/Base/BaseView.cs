@@ -16,7 +16,7 @@ namespace Core.Base
             
             Initialize();
         }
-
+        
         protected virtual void OnEnable()
         {
             ViewModel.MessageEvent += OnMessageReceived;

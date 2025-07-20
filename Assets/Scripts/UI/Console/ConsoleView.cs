@@ -13,10 +13,12 @@ namespace UI.Console
         [SerializeField] private TMP_InputField _commandInput;
         [SerializeField] private TMP_Text _logText;
         [SerializeField] private ScrollRect _scrollRect;
-        
+        [SerializeField] private Button _closeButton;
+         
         protected override void Initialize()
         {
             ViewModel.IsActive.Subscribe(SetConsoleActive).AddTo(this);
+            _closeButton.onClick.AddListener(() => ViewModel.IsActive.Value = false);
         }
 
         protected override void OnEnable()
@@ -64,6 +66,7 @@ namespace UI.Console
         private void UnSubscribe()
         {
             _commandInput.onSubmit.RemoveListener(OnSubmit);
+            _closeButton.onClick.RemoveAllListeners();
         }
     }
 }
